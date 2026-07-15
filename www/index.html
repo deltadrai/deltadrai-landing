@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>deltadr.ai</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+  <div class="app" x-data="indexViewModel()">
+
+    <div class="mesh" aria-hidden="true">
+      <template x-for="edge in edges" :key="edge.key">
+        <div class="mesh-edge" :style="edge.style"></div>
+      </template>
+      <template x-for="node in nodes" :key="node.x + '-' + node.y">
+        <div class="mesh-node" :style="{ left: node.x + '%', top: node.y + '%' }"></div>
+      </template>
+    </div>
+
+    <div class="logo-block">
+      <div class="logo-icon" role="img" aria-label="deltadr.ai Logo">
+        <div class="logo-icon__triangle"></div>
+        <div class="logo-icon__chip"></div>
+        <div class="logo-icon__three">3</div>
+      </div>
+
+      <div class="wordmark-group">
+        <div class="wordmark">
+          <span class="wordmark__delta">delta</span><span class="wordmark__dr">dr</span><span class="wordmark__ai">.ai</span>
+        </div>
+        <div class="subtitle">Heat &bull; Compute &bull; Circular</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
