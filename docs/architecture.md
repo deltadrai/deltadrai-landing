@@ -1,1 +1,12 @@
-tbd
+- plain html, css, ES6 javascript
+- ES6 module pattern
+- manual dependency injection via main.js
+  - all instances are created in main.js
+  - constructor injection only
+- no direct access to window or document in modules (never, always inject interface)
+- TDD
+- alpine.js
+  - main SPA implementation framework
+  - MVVM pattern for everything that surfaces (bubbles) towards UI
+- htmx
+  - HATEOS for all backend calls and server interaction
