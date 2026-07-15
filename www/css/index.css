@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --icon-size: clamp(140px, 32vmin, 340px);
+}
+
+@media (orientation: landscape) and (max-height: 480px) {
+  :root {
+    --icon-size: clamp(100px, 22vmin, 220px);
+  }
+}

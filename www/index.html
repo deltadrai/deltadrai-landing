@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>deltadr.ai</title>
+  <link rel="stylesheet" href="css/index.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#7FB4A8',
+              ink: '#101014',
+              meshline: '#E9F2EF',
+              meshnode: '#DCEAE6',
+            },
+          },
+          fontFamily: {
+            sans: ['Poppins', 'Segoe UI', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="h-full m-0 bg-white overflow-hidden font-sans">
+  <div class="relative w-screen h-dvh flex items-center justify-center overflow-hidden" x-data="indexViewModel()">
+
+    <div class="absolute top-0 right-0 w-[min(75vw,75vh)] aspect-square z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <template x-for="edge in edges" :key="edge.key">
+        <div class="absolute h-[1.5px] bg-brand-meshline origin-left" :style="edge.style"></div>
+      </template>
+      <template x-for="node in nodes" :key="node.x + '-' + node.y">
+        <div class="absolute w-[1.1%] h-[1.1%] min-w-1 min-h-1 rounded-full bg-brand-meshnode -translate-x-1/2 -translate-y-1/2" :style="{ left: node.x + '%', top: node.y + '%' }"></div>
+      </template>
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center justify-center gap-[clamp(0.75rem,2vmin,1.5rem)] p-[5vmin] [@media(orientation:landscape)_and_(max-height:480px)]:flex-row [@media(orientation:landscape)_and_(max-height:480px)]:gap-[clamp(1rem,4vmin,2.5rem)]">
+      <svg class="block w-[var(--icon-size)] h-[calc(var(--icon-size)*436/479)] fill-brand-teal" viewBox="0 0 479 436" role="img" aria-label="deltadr.ai Logo" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 249,2 L 245,0 L 235,0 L 228,4 L 138,164 L 134,174 L 134,181 L 137,188 L 142,193 L 150,196 L 314,196 L 315,197 L 247,272 L 242,283 L 243,291 L 249,299 L 257,302 L 328,302 L 340,305 L 352,311 L 365,325 L 372,343 L 372,361 L 367,376 L 364,381 L 350,394 L 327,402 L 48,402 L 47,401 L 148,218 L 109,218 L 1,412 L 1,426 L 10,435 L 331,436 L 353,431 L 369,423 L 381,414 L 395,397 L 405,373 L 407,361 L 407,342 L 403,324 L 391,301 L 373,284 L 354,274 L 329,268 L 297,267 L 364,192 L 369,182 L 369,176 L 366,169 L 361,164 L 353,161 L 180,161 L 240,53 L 289,140 L 327,140 L 256,10 Z
+                 M 429,348 L 429,366 L 422,392 L 407,417 L 386,436 L 479,436 Z" />
+      </svg>
+
+      <div class="flex flex-col items-center gap-1 [@media(orientation:landscape)_and_(max-height:480px)]:items-start">
+        <div class="flex items-baseline text-[clamp(1.75rem,6vmin,4.5rem)] tracking-[-0.01em] whitespace-nowrap">
+          <span class="font-normal text-brand-ink">delta</span><span class="font-extrabold text-brand-ink">dr</span><span class="font-extrabold text-brand-teal">.ai</span>
+        </div>
+        <div class="text-[clamp(0.7rem,1.6vmin,1.1rem)] font-medium tracking-[0.35em] uppercase text-brand-teal indent-[0.35em]">Heat &bull; Compute &bull; Circular</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
