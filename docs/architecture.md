@@ -20,4 +20,6 @@
   - html = View; alpine bindings (x-data, x-bind, x-on) = ViewModel glue; injected modules = Model/logic
 - htmx
   - HATEOAS for all backend calls and server interaction
+- tailwind.css
+  - for ui style
   - server returns HTML fragments, not JSON; no client-side rendering logic for server data
