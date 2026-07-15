@@ -1,12 +1,23 @@
 - plain html, css, ES6 javascript
+  - no build step, no transpiling, no bundler required
 - ES6 module pattern
+  - one class/responsibility per module, explicit import/export
+  - no globals, no side effects on import
 - manual dependency injection via main.js
   - all instances are created in main.js
+  - main.js is the composition root; no DI container/service locator
   - constructor injection only
+  - dependencies passed as constructor args, never set later via setters/properties
 - no direct access to window or document in modules (never, always inject interface)
+  - wrap browser globals behind a small adapter interface (e.g. DomAdapter), injected via constructor
+  - enables mocking in tests, keeps modules environment-agnostic
 - TDD
+  - red-green-refactor; test first
+  - modules tested in isolation using injected fakes/mocks (possible because of constructor DI + no direct window/document access)
 - alpine.js
   - main SPA implementation framework
   - MVVM pattern for everything that surfaces (bubbles) towards UI
+  - html = View; alpine bindings (x-data, x-bind, x-on) = ViewModel glue; injected modules = Model/logic
 - htmx
-  - HATEOS for all backend calls and server interaction
+  - HATEOAS for all backend calls and server interaction
+  - server returns HTML fragments, not JSON; no client-side rendering logic for server data
