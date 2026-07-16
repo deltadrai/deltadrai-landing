@@ -29,13 +29,17 @@
 <body class="h-full m-0 bg-white overflow-hidden font-sans">
   <div class="relative w-screen h-dvh flex items-center justify-center overflow-hidden" x-data="indexViewModel()">
 
-    <div class="absolute top-0 right-0 w-[min(75vw,75vh)] aspect-square z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-      <template x-for="edge in edges" :key="edge.key">
-        <div class="absolute h-[1.5px] bg-brand-meshline origin-left" :style="edge.style"></div>
-      </template>
-      <template x-for="node in nodes" :key="node.x + '-' + node.y">
-        <div class="absolute w-[1.1%] h-[1.1%] min-w-1 min-h-1 rounded-full bg-brand-meshnode -translate-x-1/2 -translate-y-1/2" :style="{ left: node.x + '%', top: node.y + '%' }"></div>
-      </template>
+    <div class="mesh-container absolute top-0 right-0 w-[min(75vw,75vh)] aspect-square z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <div class="mesh-plane relative w-full h-full">
+        <template x-for="edge in edges" :key="edge.key">
+          <div class="mesh-edge absolute h-[1.5px] bg-brand-meshline origin-left" :style="edge.style"></div>
+        </template>
+        <template x-for="node in nodes" :key="node.x + '-' + node.y">
+          <div class="mesh-node-slot absolute w-[1.1%] h-[1.1%] min-w-1 min-h-1 -translate-x-1/2 -translate-y-1/2" :style="{ left: node.x + '%', top: node.y + '%' }">
+            <div class="mesh-node w-full h-full rounded-full bg-brand-meshnode" :style="{ animationDelay: node.delay }"></div>
+          </div>
+        </template>
+      </div>
     </div>
 
     <div class="relative z-10 flex flex-col items-center justify-center gap-[clamp(0.75rem,2vmin,1.5rem)] p-[5vmin] [@media(orientation:landscape)_and_(max-height:480px)]:flex-row [@media(orientation:landscape)_and_(max-height:480px)]:gap-[clamp(1rem,4vmin,2.5rem)]">
