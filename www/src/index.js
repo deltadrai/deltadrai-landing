@@ -36,6 +36,17 @@ const MESH_EDGES = [
   [6, 15], [15, 16], [7, 16],
 ];
 
+// Duration of one full wave cycle; per-element delays below are staggered
+// fractions of this so the wave appears to travel diagonally across the mesh.
+const WAVE_DURATION_S = 4.5;
+
+// Delay is proportional to distance along the diagonal (x + y), so elements
+// near the top-left of the mesh animate first and the wave glides towards
+// the bottom-right.
+function waveDelay(x, y) {
+  return `${(((x + y) / 200) * WAVE_DURATION_S).toFixed(2)}s`;
+}
+
 function edgeStyle(a, b) {
   const dx = b.x - a.x;
   const dy = b.y - a.y;
@@ -47,12 +58,16 @@ function edgeStyle(a, b) {
     top: `${a.y}%`,
     width: `${length}%`,
     transform: `rotate(${angle}deg)`,
+    animationDelay: waveDelay((a.x + b.x) / 2, (a.y + b.y) / 2),
   };
 }
 
 export function indexViewModel() {
   return {
-    nodes: MESH_NODES,
+    nodes: MESH_NODES.map((node) => ({
+      ...node,
+      delay: waveDelay(node.x, node.y),
+    })),
     edges: MESH_EDGES.map(([from, to]) => ({
       key: `${from}-${to}`,
       style: edgeStyle(MESH_NODES[from], MESH_NODES[to]),

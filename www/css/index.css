@@ -9,3 +9,50 @@
     --icon-size: clamp(100px, 22vmin, 220px);
   }
 }
+
+/* Network mesh: tilted into a perspective plane with a wave that glides
+   diagonally across it (staggered per-node/edge animation-delay). */
+.mesh-container {
+  perspective: 1200px;
+}
+
+.mesh-plane {
+  transform: rotateX(58deg) rotateZ(-8deg);
+  transform-style: preserve-3d;
+  animation: mesh-tilt-drift 10s ease-in-out infinite;
+}
+
+.mesh-node-slot {
+  transform-style: preserve-3d;
+}
+
+.mesh-node {
+  animation: mesh-wave 4.5s ease-in-out infinite;
+}
+
+.mesh-edge {
+  animation: mesh-edge-shimmer 4.5s ease-in-out infinite;
+}
+
+@keyframes mesh-tilt-drift {
+  0%, 100% { transform: rotateX(58deg) rotateZ(-8deg); }
+  50% { transform: rotateX(61deg) rotateZ(-6deg); }
+}
+
+@keyframes mesh-wave {
+  0%, 100% { transform: translateZ(0) scale(1); opacity: 0.75; }
+  50% { transform: translateZ(20px) scale(1.25); opacity: 1; }
+}
+
+@keyframes mesh-edge-shimmer {
+  0%, 100% { opacity: 0.55; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh-plane,
+  .mesh-node,
+  .mesh-edge {
+    animation: none;
+  }
+}
