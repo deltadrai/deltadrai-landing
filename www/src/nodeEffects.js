@@ -7,8 +7,10 @@
  * to it.
  *
  * Two independent behaviours, tracked by grid index `"i,j"`:
- *  - "heating" nodes fade up to #EEAF6A, hold while randomly blinking to
- *    #748B97 (computation), then fade back out.
+ *  - "heating" nodes grow a soft #EEAF6A glow beneath them (an outward
+ *    gradient, as if the node radiated heat) while the node itself keeps its
+ *    normal colour; during the hold, the node itself randomly blinks to
+ *    #748B97 to represent computation happening on top of the heat.
  *  - "circular" nodes (never a currently-heating node) grow a ring in
  *    #A0DBB6, hide the node, reveal it again, then fade the ring out —
  *    symbolising the node being exchanged.
@@ -17,13 +19,13 @@ const HEATING_RGB = '238, 175, 106';
 const COMPUTE_RGB = '116, 139, 151';
 const CIRCULAR_RGB = '160, 219, 182';
 
-const MAX_HEATING = 7;
+const MAX_HEATING = 10;
 const HEATING_FADE_IN = 1.2;
 const HEATING_FADE_OUT = 1.0;
 const HEATING_HOLD_MIN = 6.0;
 const HEATING_HOLD_MAX = 11.0;
-const HEATING_SPAWN_GAP_MIN = 0.5;
-const HEATING_SPAWN_GAP_MAX = 1.6;
+const HEATING_SPAWN_GAP_MIN = 0.3;
+const HEATING_SPAWN_GAP_MAX = 1.0;
 const HEATING_BLINK_DUR_MIN = 0.2;
 const HEATING_BLINK_DUR_MAX = 0.45;
 const HEATING_BLINK_GAP_MIN = 0.5;
@@ -59,7 +61,7 @@ export class NodeEffects {
       CIRCULAR_SPAWN_GAP_MAX,
     );
 
-    /** @type {Array<{i:number,j:number,rgb:string,alpha:number}>} */
+    /** @type {Array<{i:number,j:number,glowAlpha:number,computing:boolean}>} */
     this.heatingNodes = [];
     /** @type {Array<{i:number,j:number,ringAlpha:number,ringGrowth:number,nodeAlpha:number}>} */
     this.circularNodes = [];
@@ -132,12 +134,12 @@ export class NodeEffects {
       const elapsed = t - node.stateStart;
 
       if (node.state === 'in') {
-        const alpha = Math.min(1, elapsed / HEATING_FADE_IN);
+        const glowAlpha = Math.min(1, elapsed / HEATING_FADE_IN);
         if (elapsed >= HEATING_FADE_IN) {
           node.state = 'hold';
           node.stateStart = t;
         }
-        out.push({ i: node.i, j: node.j, rgb: HEATING_RGB, alpha });
+        out.push({ i: node.i, j: node.j, glowAlpha, computing: false });
         continue;
       }
 
@@ -147,22 +149,22 @@ export class NodeEffects {
           node.blinkUntil = t + this._randomBetween(HEATING_BLINK_DUR_MIN, HEATING_BLINK_DUR_MAX);
           node.nextBlinkAt = node.blinkUntil + this._randomBetween(HEATING_BLINK_GAP_MIN, HEATING_BLINK_GAP_MAX);
         }
-        const rgb = t < node.blinkUntil ? COMPUTE_RGB : HEATING_RGB;
+        const computing = t < node.blinkUntil;
         if (elapsed >= node.holdDur) {
           node.state = 'out';
           node.stateStart = t;
         }
-        out.push({ i: node.i, j: node.j, rgb, alpha: 1 });
+        out.push({ i: node.i, j: node.j, glowAlpha: 1, computing });
         continue;
       }
 
       if (node.state === 'out') {
-        const alpha = Math.max(0, 1 - elapsed / HEATING_FADE_OUT);
+        const glowAlpha = Math.max(0, 1 - elapsed / HEATING_FADE_OUT);
         if (elapsed >= HEATING_FADE_OUT) {
           this._heating.delete(key);
           continue;
         }
-        out.push({ i: node.i, j: node.j, rgb: HEATING_RGB, alpha });
+        out.push({ i: node.i, j: node.j, glowAlpha, computing: false });
       }
     }
     return out;
