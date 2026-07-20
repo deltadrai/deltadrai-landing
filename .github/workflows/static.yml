@@ -31,6 +31,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Fetch actual Git LFS media (mp4/gif/png/jpg/pdf) instead of pointer
+          # files, so the deployed site serves the real assets. Harmless when
+          # the repo contains no LFS objects.
+          lfs: true
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
