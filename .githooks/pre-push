@@ -1,0 +1,5 @@
+#!/bin/sh
+# Delegates to Git LFS. This repo uses core.hooksPath=.githooks, so the hooks
+# that 'git lfs install' would normally place in .git/hooks live here instead.
+command -v git-lfs >/dev/null 2>&1 || { echo >&2 "\nThis repository is configured for Git LFS but 'git-lfs' was not found on your path. Install it from https://git-lfs.com and run 'git lfs install'.\n"; exit 2; }
+git lfs pre-push "$@"

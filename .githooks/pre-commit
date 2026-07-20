@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+#
+# pre-commit: enforce the repository's binary-object policy.
+#
+# Policy:
+#   * Binary media of these types is allowed and MUST be stored via Git LFS:
+#       .mp4  .gif  .png  .jpg  .jpeg  .pdf   (see .gitattributes)
+#   * Any OTHER binary blob is rejected — it must not enter the repository,
+#     neither directly nor through Git LFS.
+#
+# This keeps history free of arbitrary binary large objects while still
+# allowing the handful of media formats the site needs.
+
+set -euo pipefail
+
+# Case-insensitive extension allowlist. Keep in sync with .gitattributes.
+allowed_re='\.(mp4|gif|png|jpe?g|pdf)$'
+
+git config core.quotepath false >/dev/null 2>&1 || true
+
+rejected_binary=()
+missing_lfs=()
+
+# Iterate staged Added/Copied/Modified files, NUL-delimited to survive any name.
+while IFS= read -r -d '' f; do
+    if printf '%s' "$f" | grep -Eiq "$allowed_re"; then
+        # Allowed media type — make sure it actually went through Git LFS.
+        first=$(git show ":$f" 2>/dev/null | head -c 64 || true)
+        if [[ "$first" != version\ https://git-lfs.github.com/spec/* ]]; then
+            missing_lfs+=("$f")
+        fi
+    else
+        # Not an allowed type — reject if the staged content is binary.
+        # git numstat prints "-\t-\t<path>" for binary blobs. LFS-tracked files
+        # stage as a small text pointer, so they correctly read as non-binary.
+        numstat=$(git diff --cached --numstat -- "$f" | head -n1)
+        if [[ "$numstat" == "-"$'\t'"-"$'\t'* ]]; then
+            rejected_binary+=("$f")
+        fi
+    fi
+done < <(git diff --cached --name-only --diff-filter=ACM -z)
+
+status=0
+
+if ((${#rejected_binary[@]})); then
+    echo "pre-commit: rejected binary file(s) that are not an allowed media type:" >&2
+    printf '  %s\n' "${rejected_binary[@]}" >&2
+    status=1
+fi
+
+if ((${#missing_lfs[@]})); then
+    echo "pre-commit: allowed media file(s) not stored via Git LFS:" >&2
+    printf '  %s\n' "${missing_lfs[@]}" >&2
+    echo "  Re-add them so the LFS filter runs:  git add <file>" >&2
+    echo "  (Ensure Git LFS is installed:        git lfs install)" >&2
+    status=1
+fi
+
+if ((status)); then
+    echo "" >&2
+    echo "Only these binary types may be committed (via Git LFS): mp4, gif, png, jpg/jpeg, pdf." >&2
+    echo "Add a new type to .gitattributes if it should be allowed." >&2
+fi
+
+exit $status
