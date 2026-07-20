@@ -20,6 +20,22 @@
     <canvas x-ref="canvas" id="waves"></canvas>
   </div>
 
+  <!-- Impressum button, anchored top-right, with a dropdown revealing the legal notice image. -->
+  <div class="impressum" x-data="{ open: false }">
+    <button
+      type="button"
+      class="impressum__button"
+      @click="open = !open"
+      @click.outside="open = false"
+      :aria-expanded="open"
+    >
+      Impressum
+    </button>
+    <div class="impressum__dropdown" x-show="open" x-cloak x-transition>
+      <img src="img/impressum.jpg" alt="Impressum" />
+    </div>
+  </div>
+
   <!-- Logo lockup, anchored bottom-left as in the reference artwork. -->
   <div class="brand">
     <svg class="brand__mark" viewBox="0 0 479 436" role="img" aria-label="deltadr.ai Logo" xmlns="http://www.w3.org/2000/svg">
