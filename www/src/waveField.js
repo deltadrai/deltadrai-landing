@@ -46,11 +46,23 @@ export class WaveField {
     for (let j = 0; j <= this.rows; j++) {
       const row = [];
       for (let i = 0; i <= this.cols; i++) {
-        row.push(this._project(i / this.cols, j / this.rows, t));
+        row.push(this._project(i / this.cols, j / this.rows, t, i, j));
       }
       grid.push(row);
     }
     this.points = grid;
+  }
+
+  /**
+   * Deterministic pseudo-random jitter per grid node (stable across frames so
+   * the mesh doesn't flicker), used to break up the otherwise perfectly even
+   * spacing of rows/columns.
+   * @param {number} i column index
+   * @param {number} j row index
+   */
+  _jitter(i, j) {
+    const seed = Math.sin(i * 12.9898 + j * 78.233) * 43758.5453;
+    return seed - Math.floor(seed);
   }
 
   /**
@@ -61,32 +73,43 @@ export class WaveField {
    * @param {number} v  0..1 depth of the grid (0 = far/top, 1 = near/bottom)
    * @param {number} t  time in seconds
    */
-  _project(u, v, t) {
+  _project(u, v, t, i, j) {
     const w = this.width;
     const h = this.height;
     const horizon = h * 0.12;
 
+    // Slow the whole animation down so the swells roll gently rather than
+    // scroll past.
+    const time = t * 0.45;
+
+    // Stable per-node jitter (0..1) used to de-uniform the otherwise perfectly
+    // even grid spacing.
+    const jx = this._jitter(i, j) - 0.5;
+    const jy = this._jitter(i + 1, j + 1) - 0.5;
+
     // Rows bunch up near the horizon (pow > 1) and spread out near the viewer.
     const depth = Math.pow(v, 1.9);
     const baseY = horizon + (h * 1.15 - horizon) * depth;
+    const cellH = (h * 1.15 - horizon) / this.rows;
 
     // A flat plane receding to a wide horizon — only a slight convergence, so
     // the far edge still spans the frame (no dome/fan silhouette).
     const spread = 0.72 + 0.5 * v;
-    const x = w * 0.5 + (u - 0.5) * w * 1.28 * spread;
+    const cellW = (w * 1.28 * spread) / this.cols;
+    const x = w * 0.5 + (u - 0.5) * w * 1.28 * spread + jx * cellW * 0.7;
 
     // Rolling swells: the dominant sines depend on depth, so their crests form
     // horizontal ridges that travel across the plane as time advances; a gentle
     // side-to-side wobble and a finer cross term keep the ridges from looking
     // mechanical.
-    const wobble = Math.sin(u * 2.3 + t * 0.25) * 0.5;
+    const wobble = Math.sin(u * 2.3 + time * 0.25) * 0.5;
     const wave =
-      Math.sin(v * 9.0 - t * 0.8 + wobble) +
-      0.45 * Math.sin(v * 4.3 - t * 0.5 + u * 1.6) +
-      0.25 * Math.sin(u * 7.0 + v * 5.0 + t * 0.6);
+      Math.sin(v * 9.0 - time * 0.8 + wobble) +
+      0.45 * Math.sin(v * 4.3 - time * 0.5 + u * 1.6) +
+      0.25 * Math.sin(u * 7.0 + v * 5.0 + time * 0.6);
 
     const amp = h * 0.14 * Math.pow(v, 1.1); // waves grow towards the viewer
-    const y = baseY - wave * amp;
+    const y = baseY - wave * amp + jy * cellH * 0.7;
 
     // Depth cue: fade to nothing at the horizon.
     const alpha = Math.min(1, Math.pow(v, 1.3) * 1.2);
