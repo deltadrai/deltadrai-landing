@@ -8,8 +8,17 @@
   <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
-  <!-- Animated wave mesh backdrop (see src/waveField.js). -->
-  <canvas id="waves" aria-hidden="true"></canvas>
+  <!-- Animated wave mesh backdrop. The ViewModel (src/waveFieldViewModel.js)
+       is bound as x-data; Alpine propagates lifecycle (x-init) and window
+       resize (@resize.window) into it, and $refs.canvas binds the canvas. -->
+  <div
+    x-data="waveFieldViewModel()"
+    x-init="boot($refs.canvas)"
+    @resize.window.debounce.150ms="sync()"
+    aria-hidden="true"
+  >
+    <canvas x-ref="canvas" id="waves"></canvas>
+  </div>
 
   <!-- Logo lockup, anchored bottom-left as in the reference artwork. -->
   <div class="brand">
