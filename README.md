@@ -1,4 +1,4 @@
-# deltadrai-landing
-Landing Page, deltadr.ai
+# deltadrai
+## Heat▫️Compute▫️Circular
 
 ![deltadr.ai](deltadrai-hero.jpeg)
