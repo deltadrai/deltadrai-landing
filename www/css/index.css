@@ -90,3 +90,50 @@ body {
     font-size: clamp(1.6rem, 9vw, 2.4rem);
   }
 }
+
+[x-cloak] {
+  display: none !important;
+}
+
+/* Impressum button + dropdown, anchored to the top-right corner. */
+.impressum {
+  position: fixed;
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  z-index: 20;
+}
+
+.impressum__button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--brand-ink);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(16, 16, 20, 0.15);
+  border-radius: 0.6rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s ease;
+}
+
+.impressum__button:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.impressum__dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  padding: 0.5rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(16, 16, 20, 0.2);
+}
+
+.impressum__dropdown img {
+  display: block;
+  max-width: min(90vw, 420px);
+  height: auto;
+  border-radius: 0.4rem;
+}
