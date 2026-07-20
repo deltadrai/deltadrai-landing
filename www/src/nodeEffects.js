@@ -35,8 +35,8 @@ const CIRCULAR_NODE_OUT = 0.6;
 const CIRCULAR_HOLD = 1.0;
 const CIRCULAR_NODE_IN = 0.6;
 const CIRCULAR_RING_OUT = 0.8;
-const CIRCULAR_SPAWN_GAP_MIN = 6.0;
-const CIRCULAR_SPAWN_GAP_MAX = 14.0;
+const CIRCULAR_SPAWN_GAP_MIN = 4.5;
+const CIRCULAR_SPAWN_GAP_MAX = 10.0;
 
 export class NodeEffects {
   /**
