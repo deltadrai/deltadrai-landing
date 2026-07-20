@@ -14,10 +14,12 @@
  * @param {object}   deps
  * @param {import('./domAdapter.js').DomAdapter} deps.dom
  * @param {() => import('./waveField.js').WaveField} deps.createField
+ * @param {() => import('./nodeEffects.js').NodeEffects} deps.createEffects
  * @param {(canvas: HTMLCanvasElement) => import('./canvasRenderer.js').CanvasRenderer} deps.createRenderer
  */
-export function createWaveFieldViewModel({ dom, createField, createRenderer }) {
+export function createWaveFieldViewModel({ dom, createField, createEffects, createRenderer }) {
   let field = null;
+  let effects = null;
   let renderer = null;
   let stop = null;
 
@@ -25,6 +27,7 @@ export function createWaveFieldViewModel({ dom, createField, createRenderer }) {
     /** Alpine x-init: build the model + renderer and start animating. */
     boot(canvas) {
       field = createField();
+      effects = createEffects();
       renderer = createRenderer(canvas);
       this.sync();
       if (!dom.prefersReducedMotion()) {
@@ -43,7 +46,11 @@ export function createWaveFieldViewModel({ dom, createField, createRenderer }) {
     /** Advance the model one step and render the resulting frame. */
     frame(t) {
       field.advance(t);
-      renderer.draw(field.points, field.rgb);
+      effects.advance(t);
+      renderer.draw(field.points, field.rgb, {
+        heatingNodes: effects.heatingNodes,
+        circularNodes: effects.circularNodes,
+      });
     },
 
     /** Alpine lifecycle: stop the loop when the component is torn down. */

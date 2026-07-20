@@ -1,3 +1,5 @@
+import { CIRCULAR_RGB } from './nodeEffects.js';
+
 /**
  * CanvasRenderer — the only module aware of the `<canvas>` and its 2D context.
  * It renders a WaveField frame (the projected `points` grid) but knows nothing
@@ -25,17 +27,26 @@ export class CanvasRenderer {
 
   /**
    * Draw one frame: a triangulated wireframe (edges) with a node at every
-   * intersection, both fading towards the horizon.
+   * intersection, both fading towards the horizon, plus an optional overlay
+   * layer of scripted per-node effects (heating/computation blinks, circular
+   * exchange rings) supplied independently of the wave geometry.
    * @param {Array<Array<{x:number,y:number,alpha:number,v:number}>>} points
    * @param {string} rgb brand colour as an "r, g, b" string
+   * @param {object} [effects]
+   * @param {Array<{i:number,j:number,rgb:string,alpha:number}>} [effects.heatingNodes]
+   * @param {Array<{i:number,j:number,ringAlpha:number,ringGrowth:number,nodeAlpha:number}>} [effects.circularNodes]
    */
-  draw(points, rgb) {
+  draw(points, rgb, effects = {}) {
     const ctx = this._ctx;
     ctx.clearRect(0, 0, this._w, this._h);
     if (!points.length) return;
 
     const rows = points.length - 1;
     const cols = points[0].length - 1;
+    const heatingByKey = new Map();
+    for (const h of effects.heatingNodes || []) heatingByKey.set(`${h.i},${h.j}`, h);
+    const circularByKey = new Map();
+    for (const c of effects.circularNodes || []) circularByKey.set(`${c.i},${c.j}`, c);
 
     // Edges: connect each point to its right, down and diagonal neighbour.
     ctx.lineWidth = 1;
@@ -63,11 +74,33 @@ export class CanvasRenderer {
       for (let i = 0; i <= cols; i++) {
         const p = points[j][i];
         if (p.alpha < 0.02) continue;
+        const key = `${i},${j}`;
+        const circular = circularByKey.get(key);
+        const nodeAlphaMul = circular ? circular.nodeAlpha : 1;
         const r = 0.5 + 1.9 * p.v;
-        ctx.fillStyle = `rgba(${rgb}, ${Math.min(1, p.alpha * 0.9).toFixed(3)})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        ctx.fill();
+
+        if (nodeAlphaMul > 0.01) {
+          const heating = heatingByKey.get(key);
+          const fillRgb = heating ? heating.rgb : rgb;
+          const baseAlpha = heating ? Math.max(p.alpha, 0.35) * heating.alpha : p.alpha * 0.9;
+          const alpha = Math.min(1, baseAlpha) * nodeAlphaMul;
+          ctx.fillStyle = `rgba(${fillRgb}, ${alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (circular) {
+          const ringRadius = r + circular.ringGrowth * (5 + 6 * p.v);
+          const ringAlpha = Math.min(1, circular.ringAlpha * p.alpha * 1.4);
+          if (ringAlpha > 0.01) {
+            ctx.strokeStyle = `rgba(${CIRCULAR_RGB}, ${ringAlpha.toFixed(3)})`;
+            ctx.lineWidth = 1.25;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, ringRadius, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        }
       }
     }
   }
