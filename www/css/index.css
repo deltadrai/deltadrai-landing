@@ -1,58 +1,92 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --icon-size: clamp(140px, 32vmin, 340px);
+  --brand-teal: #7fb4a8;
+  --brand-ink: #101014;
 }
 
-@media (orientation: landscape) and (max-height: 480px) {
-  :root {
-    --icon-size: clamp(100px, 22vmin, 220px);
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Network mesh: tilted into a perspective plane with a wave that glides
-   diagonally across it (staggered per-node/edge animation-delay). */
-.mesh-container {
-  perspective: 1200px;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
-.mesh-plane {
-  transform: rotateX(58deg) rotateZ(-8deg);
-  transform-style: preserve-3d;
-  animation: mesh-tilt-drift 10s ease-in-out infinite;
+body {
+  background: #ffffff;
+  font-family: 'Poppins', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
 }
 
-.mesh-node-slot {
-  transform-style: preserve-3d;
+/* Full-viewport animated wave mesh, sitting behind everything. */
+#waves {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
 }
 
-.mesh-node {
-  animation: mesh-wave 4.5s ease-in-out infinite;
+/* Logo lockup: icon beside wordmark, anchored to the bottom-left corner.
+   A soft white halo keeps it legible over the mesh. */
+.brand {
+  position: fixed;
+  left: clamp(1.25rem, 4vw, 4rem);
+  bottom: clamp(1.25rem, 4vw, 3.5rem);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.6vw, 1.1rem);
+  padding: 0.4rem 0.6rem;
+  border-radius: 1rem;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.7) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
-.mesh-edge {
-  animation: mesh-edge-shimmer 4.5s ease-in-out infinite;
+.brand__mark {
+  display: block;
+  width: auto;
+  height: clamp(2.4rem, 6vw, 4.75rem);
+  fill: var(--brand-teal);
 }
 
-@keyframes mesh-tilt-drift {
-  0%, 100% { transform: rotateX(58deg) rotateZ(-8deg); }
-  50% { transform: rotateX(61deg) rotateZ(-6deg); }
+.brand__word {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
-@keyframes mesh-wave {
-  0%, 100% { transform: translateZ(0) scale(1); opacity: 0.75; }
-  50% { transform: translateZ(20px) scale(1.25); opacity: 1; }
+.brand__delta {
+  font-weight: 400;
+  color: var(--brand-ink);
 }
 
-@keyframes mesh-edge-shimmer {
-  0%, 100% { opacity: 0.55; filter: brightness(1); }
-  50% { opacity: 1; filter: brightness(1.4); }
+.brand__dr {
+  font-weight: 800;
+  color: var(--brand-ink);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .mesh-plane,
-  .mesh-node,
-  .mesh-edge {
-    animation: none;
+.brand__ai {
+  font-weight: 800;
+  color: var(--brand-teal);
+}
+
+@media (max-width: 480px) {
+  .brand__word {
+    font-size: clamp(1.6rem, 9vw, 2.4rem);
   }
 }

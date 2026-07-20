@@ -1,12 +1,12 @@
 /**
  * Composition root (IoC). All instances are created and wired here;
  * no build step, loaded directly as an ES module by index.html.
+ *
+ * Modules stay free of direct window/document access — the browser globals are
+ * resolved here and injected (per docs/architecture.md).
  */
-import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/module.esm.js';
-import { indexViewModel } from './index.js';
+import { WaveField } from './waveField.js';
 
-window.Alpine = Alpine;
-
-Alpine.data('indexViewModel', indexViewModel);
-
-Alpine.start();
+const canvas = document.getElementById('waves');
+const field = new WaveField(canvas, window);
+field.start();
