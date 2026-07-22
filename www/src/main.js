@@ -10,6 +10,8 @@ import { WaveField } from './waveField.js';
 import { NodeEffects } from './nodeEffects.js';
 import { CanvasRenderer } from './canvasRenderer.js';
 import { createWaveFieldViewModel } from './waveFieldViewModel.js';
+import { FormspreeClient } from './formspreeClient.js';
+import { createWaitlistViewModel } from './waitlistViewModel.js';
 
 // Adapter over the real window (the single point of contact with a browser global).
 const domAdapter = new DomAdapter(window);
@@ -27,6 +29,18 @@ const createRenderer = (canvas) => new CanvasRenderer(canvas);
 // Bind the ViewModel to Alpine's `x-data="waveFieldViewModel"`.
 Alpine.data('waveFieldViewModel', () =>
   createWaveFieldViewModel({ dom: domAdapter, createField, createEffects, createRenderer }),
+);
+
+// Coming-soon waitlist form: posts the visitor's email to Formspree, alongside
+// a fixed staff-facing lead notice the visitor never sees or edits.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mlgqwgzz';
+const WAITLIST_STAFF_MESSAGE =
+  'New lead: a visitor joined the deltadr.ai waitlist from the coming-soon page.';
+const formspreeClient = new FormspreeClient(window.fetch.bind(window), FORMSPREE_ENDPOINT);
+
+// Bind the ViewModel to Alpine's `x-data="waitlistViewModel"`.
+Alpine.data('waitlistViewModel', () =>
+  createWaitlistViewModel({ client: formspreeClient, staffMessage: WAITLIST_STAFF_MESSAGE }),
 );
 
 window.Alpine = Alpine;

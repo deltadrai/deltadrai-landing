@@ -95,6 +95,134 @@ body {
   display: none !important;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Coming-soon waitlist block, centered over the wave backdrop. */
+.coming-soon {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem clamp(1.25rem, 5vw, 3rem) 8rem;
+}
+
+.coming-soon__card {
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 20px 60px rgba(16, 16, 20, 0.12);
+}
+
+.coming-soon__title {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  font-weight: 800;
+  color: var(--brand-ink);
+  margin-bottom: 1rem;
+}
+
+.coming-soon__title-accent {
+  color: var(--brand-teal);
+}
+
+.coming-soon__lead {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(16, 16, 20, 0.75);
+  margin-bottom: 1rem;
+}
+
+.coming-soon__cta {
+  font-weight: 600;
+  color: var(--brand-ink);
+  margin-bottom: 1.75rem;
+}
+
+.coming-soon__form {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.coming-soon__input {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 0.85rem 1.1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(16, 16, 20, 0.15);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--brand-ink);
+  background: #ffffff;
+}
+
+.coming-soon__input:focus {
+  outline: 2px solid var(--brand-teal);
+  outline-offset: 2px;
+}
+
+.coming-soon__input:disabled {
+  opacity: 0.6;
+}
+
+.coming-soon__submit {
+  flex: 0 0 auto;
+  padding: 0.85rem 1.6rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: var(--brand-teal);
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.coming-soon__submit:hover:not(:disabled) {
+  background: #6fa398;
+}
+
+.coming-soon__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.coming-soon__feedback {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.coming-soon__feedback--success {
+  color: #2f7d5e;
+}
+
+.coming-soon__feedback--error {
+  color: #c0392b;
+}
+
+@media (max-width: 480px) {
+  .coming-soon {
+    padding: 5.5rem 1rem 7rem;
+  }
+}
+
 /* Impressum button + dropdown, anchored to the top-right corner. */
 .impressum {
   position: fixed;

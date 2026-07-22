@@ -20,6 +20,48 @@
     <canvas x-ref="canvas" id="waves"></canvas>
   </div>
 
+  <!-- Coming-soon waitlist block, centered over the wave backdrop. -->
+  <main class="coming-soon" x-data="waitlistViewModel()">
+    <div class="coming-soon__card">
+      <h1 class="coming-soon__title">Coming <span class="coming-soon__title-accent">soon</span></h1>
+      <p class="coming-soon__lead">
+        We're working on an exceptional experience that will transform the way you think about
+        heating and processing AI workloads in a sustainable manner. Innovative components,
+        seamless integration, and unmatched design quality.
+      </p>
+      <p class="coming-soon__cta">Join the waitlist to get an exclusive early glimpse.</p>
+
+      <form class="coming-soon__form" @submit.prevent="submit()" novalidate>
+        <label class="sr-only" for="waitlist-email">Email address</label>
+        <input
+          id="waitlist-email"
+          type="email"
+          name="email"
+          class="coming-soon__input"
+          placeholder="you@example.com"
+          x-model="email"
+          :disabled="status === 'submitting' || status === 'success'"
+          required
+        />
+        <button
+          type="submit"
+          class="coming-soon__submit"
+          :disabled="status === 'submitting' || status === 'success'"
+        >
+          <span x-show="status !== 'submitting'">Notify me</span>
+          <span x-show="status === 'submitting'" x-cloak>Sending…</span>
+        </button>
+      </form>
+
+      <p class="coming-soon__feedback coming-soon__feedback--success" x-show="status === 'success'" x-cloak>
+        Thanks — you're on the list. We'll be in touch.
+      </p>
+      <p class="coming-soon__feedback coming-soon__feedback--error" x-show="status === 'error'" x-cloak>
+        Something went wrong. Please try again.
+      </p>
+    </div>
+  </main>
+
   <!-- Impressum button, anchored top-right, with a dropdown revealing the legal notice image. -->
   <div class="impressum" x-data="{ open: false }">
     <button
