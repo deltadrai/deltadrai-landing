@@ -16,14 +16,12 @@ import { createWaitlistViewModel } from './waitlistViewModel.js';
 // Adapter over the real window (the single point of contact with a browser global).
 const domAdapter = new DomAdapter(window);
 
-// Grid dimensions shared by the wave geometry and the independent node-effects
-// layer, so heating/circular nodes line up with the wave's grid intersections.
-const GRID_COLS = 48;
-const GRID_ROWS = 30;
-
 // Factories: how the ViewModel obtains a fresh Model and a canvas-bound renderer.
-const createField = () => new WaveField({ cols: GRID_COLS, rows: GRID_ROWS });
-const createEffects = () => new NodeEffects({ cols: GRID_COLS, rows: GRID_ROWS });
+// WaveField derives its own grid resolution from the viewport (see
+// waveField.js#setViewport); the ViewModel keeps NodeEffects' grid in sync so
+// heating/circular nodes line up with the wave's grid intersections.
+const createField = () => new WaveField();
+const createEffects = () => new NodeEffects();
 const createRenderer = (canvas) => new CanvasRenderer(canvas);
 
 // Bind the ViewModel to Alpine's `x-data="waveFieldViewModel"`.

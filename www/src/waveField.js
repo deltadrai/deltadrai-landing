@@ -11,17 +11,35 @@
 export class WaveField {
   /**
    * @param {object} [options]
-   * @param {number} [options.cols] grid columns
-   * @param {number} [options.rows] grid rows
    * @param {string} [options.rgb]  brand colour as an "r, g, b" string
+   * @param {number} [options.colSpacing] target CSS-px distance between adjacent columns
+   * @param {number} [options.rowSpacing] target CSS-px distance between adjacent rows
+   * @param {number} [options.minCols] lower bound on grid resolution (very narrow viewports)
+   * @param {number} [options.minRows] lower bound on grid resolution (very short viewports)
+   * @param {number} [options.maxCols] upper bound on grid resolution (perf cap on huge viewports)
+   * @param {number} [options.maxRows] upper bound on grid resolution (perf cap on huge viewports)
    */
-  constructor({ cols = 48, rows = 30, rgb = '127, 180, 168' } = {}) {
-    this.cols = cols;
-    this.rows = rows;
+  constructor({
+    rgb = '127, 180, 168',
+    colSpacing = 50,
+    rowSpacing = 37,
+    minCols = 10,
+    minRows = 8,
+    maxCols = 90,
+    maxRows = 60,
+  } = {}) {
     this.rgb = rgb;
+    this._colSpacing = colSpacing;
+    this._rowSpacing = rowSpacing;
+    this._minCols = minCols;
+    this._minRows = minRows;
+    this._maxCols = maxCols;
+    this._maxRows = maxRows;
 
     this.width = 0;
     this.height = 0;
+    this.cols = minCols;
+    this.rows = minRows;
 
     /**
      * Latest projected grid: rows+1 arrays of cols+1 points, each
@@ -31,10 +49,31 @@ export class WaveField {
     this.points = [];
   }
 
-  /** Push the current viewport dimensions in (called on init and resize). */
+  /**
+   * Push the current viewport dimensions in (called on init and resize), and
+   * re-derive the grid resolution from it so that adjacent nodes stay the
+   * same CSS-px distance apart regardless of viewport size, aspect ratio or
+   * DPI — a fixed column/row count would otherwise squash into thin strips on
+   * narrow viewports (e.g. mobile portrait). DPI itself needs no separate
+   * handling here: everything downstream stays in CSS pixels, the backing
+   * store is scaled independently in CanvasRenderer.
+   */
   setViewport(width, height) {
     this.width = width;
     this.height = height;
+
+    // Mirrors the overscan factors used in `_project` (1.28x width, and
+    // height minus the 0.12h horizon down to the 1.15h far edge) so the
+    // derived grid resolution matches what's actually drawn.
+    const horizontalExtent = width * 1.28;
+    const depthExtent = height * 1.03;
+
+    this.cols = this._clamp(Math.round(horizontalExtent / this._colSpacing), this._minCols, this._maxCols);
+    this.rows = this._clamp(Math.round(depthExtent / this._rowSpacing), this._minRows, this._maxRows);
+  }
+
+  _clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
   }
 
   /**
