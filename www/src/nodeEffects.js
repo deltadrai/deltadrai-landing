@@ -47,7 +47,7 @@ export class NodeEffects {
    * @param {number} [options.rows] grid rows (must match the WaveField's)
    * @param {() => number} [options.random] source of randomness, injectable for tests
    */
-  constructor({ cols = 48, rows = 30, random = Math.random } = {}) {
+  constructor({ cols = 10, rows = 8, random = Math.random } = {}) {
     this.cols = cols;
     this.rows = rows;
     this._random = random;
@@ -64,6 +64,22 @@ export class NodeEffects {
     /** @type {Array<{i:number,j:number,glowAlpha:number,computing:boolean}>} */
     this.heatingNodes = [];
     /** @type {Array<{i:number,j:number,ringAlpha:number,ringGrowth:number,nodeAlpha:number}>} */
+    this.circularNodes = [];
+  }
+
+  /**
+   * Update the shared grid resolution (called on resize, once the WaveField
+   * has re-derived its own cols/rows). Existing nodes are keyed by grid index,
+   * so a resolution change drops any in-flight lifecycles rather than risk
+   * indices that fall outside the new grid.
+   */
+  setGrid(cols, rows) {
+    if (cols === this.cols && rows === this.rows) return;
+    this.cols = cols;
+    this.rows = rows;
+    this._heating.clear();
+    this._circular.clear();
+    this.heatingNodes = [];
     this.circularNodes = [];
   }
 

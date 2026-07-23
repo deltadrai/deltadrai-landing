@@ -40,6 +40,7 @@ export function createWaveFieldViewModel({ dom, createField, createEffects, crea
       if (!field || !renderer) return;
       renderer.resize(dom.width, dom.height, dom.pixelRatio);
       field.setViewport(dom.width, dom.height);
+      effects.setGrid(field.cols, field.rows);
       if (dom.prefersReducedMotion()) this.frame(0);
     },
 
