@@ -258,15 +258,82 @@ body {
   position: absolute;
   top: calc(100% + 0.5rem);
   right: 0;
+  width: min(90vw, 420px);
+  max-height: min(75vh, 640px);
+  overflow-y: auto;
   padding: 0.5rem;
   background: #ffffff;
   border-radius: 0.75rem;
   box-shadow: 0 10px 30px rgba(16, 16, 20, 0.2);
 }
 
-.impressum__dropdown img {
+.impressum__dropdown > img {
   display: block;
-  max-width: min(90vw, 420px);
+  width: 100%;
+  max-width: 100%;
   height: auto;
   border-radius: 0.4rem;
+}
+
+/* Datenschutz / Informationspflicht text, matching the coming-soon card's
+   typography and brand colors. */
+.impressum__legal {
+  padding: 1rem 0.5rem 0.25rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: rgba(16, 16, 20, 0.75);
+}
+
+.impressum__legal-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--brand-ink);
+  margin-bottom: 0.5rem;
+}
+
+.impressum__legal-subtitle {
+  font-weight: 600;
+  color: var(--brand-ink);
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.impressum__legal h5 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--brand-teal);
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.impressum__legal p {
+  margin-bottom: 0.6rem;
+}
+
+.impressum__legal ul {
+  margin: 0 0 0.6rem 1.1rem;
+}
+
+.impressum__legal li {
+  margin-bottom: 0.2rem;
+}
+
+.impressum__legal a {
+  color: var(--brand-teal);
+  font-weight: 600;
+}
+
+.impressum__legal .impressum__legal-contact-img {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  margin: 0.4rem 0 0.8rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 14px rgba(16, 16, 20, 0.15);
+}
+
+.impressum__legal-source {
+  font-size: 0.75rem;
+  color: rgba(16, 16, 20, 0.55);
 }
