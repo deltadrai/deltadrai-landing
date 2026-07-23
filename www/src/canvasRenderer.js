@@ -26,6 +26,15 @@ export class CanvasRenderer {
   }
 
   /**
+   * Fade the canvas via CSS opacity (see the `#waves` transition in
+   * index.css) — used to mask a discontinuous grid-resolution change (e.g. a
+   * mobile orientation flip) behind a brief fade instead of an abrupt jump.
+   */
+  setOpacity(alpha) {
+    this._canvas.style.opacity = String(alpha);
+  }
+
+  /**
    * Draw one frame: a triangulated wireframe (edges) with a node at every
    * intersection, both fading towards the horizon, plus an optional overlay
    * layer of scripted per-node effects (heating/computation blinks, circular

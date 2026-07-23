@@ -61,15 +61,29 @@ export class WaveField {
   setViewport(width, height) {
     this.width = width;
     this.height = height;
+    const grid = this.gridFor(width, height);
+    this.cols = grid.cols;
+    this.rows = grid.rows;
+  }
 
+  /**
+   * Pure preview of the grid resolution `setViewport` would derive for a
+   * given viewport, without mutating any state. Lets a caller (e.g. the
+   * ViewModel) detect an upcoming grid-resolution change — a column/row
+   * count change re-keys every node, which is a discontinuous jump rather
+   * than a smooth reflow — before committing to it.
+   */
+  gridFor(width, height) {
     // Mirrors the overscan factors used in `_project` (1.28x width, and
     // height minus the 0.12h horizon down to the 1.15h far edge) so the
     // derived grid resolution matches what's actually drawn.
     const horizontalExtent = width * 1.28;
     const depthExtent = height * 1.03;
 
-    this.cols = this._clamp(Math.round(horizontalExtent / this._colSpacing), this._minCols, this._maxCols);
-    this.rows = this._clamp(Math.round(depthExtent / this._rowSpacing), this._minRows, this._maxRows);
+    return {
+      cols: this._clamp(Math.round(horizontalExtent / this._colSpacing), this._minCols, this._maxCols),
+      rows: this._clamp(Math.round(depthExtent / this._rowSpacing), this._minRows, this._maxRows),
+    };
   }
 
   _clamp(value, min, max) {

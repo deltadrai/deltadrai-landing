@@ -23,7 +23,10 @@ body {
   overflow: hidden;
 }
 
-/* Full-viewport animated wave mesh, sitting behind everything. */
+/* Full-viewport animated wave mesh, sitting behind everything. The opacity
+   transition masks the grid-resolution jump on a big aspect-ratio change
+   (e.g. a mobile orientation flip) behind a brief fade — see
+   waveFieldViewModel.js's RESIZE_FADE_MS, which must match this duration. */
 #waves {
   position: fixed;
   inset: 0;
@@ -32,6 +35,8 @@ body {
   z-index: 0;
   display: block;
   pointer-events: none;
+  opacity: 1;
+  transition: opacity 220ms ease;
 }
 
 /* Logo lockup: icon beside wordmark, anchored to the bottom-left corner.
