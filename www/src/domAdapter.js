@@ -33,6 +33,16 @@ export class DomAdapter {
     );
   }
 
+  /** Current time in seconds, on the same clock basis as `startAnimation`'s callback. */
+  now() {
+    return this._win.performance.now() * 0.001;
+  }
+
+  /** Resolve after `ms` milliseconds — used to sequence a fade around a resize. */
+  wait(ms) {
+    return new Promise((resolve) => this._win.setTimeout(resolve, ms));
+  }
+
   /**
    * Drive an animation loop, invoking `cb(timeSeconds)` each frame.
    * @param {(timeSeconds: number) => void} cb

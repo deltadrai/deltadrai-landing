@@ -17,6 +17,10 @@
  * @param {() => import('./nodeEffects.js').NodeEffects} deps.createEffects
  * @param {(canvas: HTMLCanvasElement) => import('./canvasRenderer.js').CanvasRenderer} deps.createRenderer
  */
+
+// Must match the `#waves` opacity transition duration in index.css.
+const RESIZE_FADE_MS = 220;
+
 export function createWaveFieldViewModel({ dom, createField, createEffects, createRenderer }) {
   let field = null;
   let effects = null;
@@ -35,13 +39,40 @@ export function createWaveFieldViewModel({ dom, createField, createEffects, crea
       }
     },
 
-    /** Alpine @resize.window: re-measure; repaint immediately if not looping. */
-    sync() {
+    /**
+     * Alpine @resize.window: re-measure; repaint immediately if not looping.
+     *
+     * A resize that changes the grid's column/row count (e.g. a mobile
+     * orientation flip) re-keys every node — a discontinuous jump rather than
+     * a smooth reflow — so that case is masked behind a brief fade-out/in
+     * instead of shown as an abrupt pop. A resize that keeps the same grid
+     * resolution (most desktop window drags) reflows continuously and skips
+     * the fade entirely.
+     */
+    async sync() {
       if (!field || !renderer) return;
-      renderer.resize(dom.width, dom.height, dom.pixelRatio);
-      field.setViewport(dom.width, dom.height);
+      const { width, height, pixelRatio } = dom;
+      const nextGrid = field.gridFor(width, height);
+      const gridChanged =
+        field.width > 0 && (nextGrid.cols !== field.cols || nextGrid.rows !== field.rows);
+      const shouldFade = gridChanged && !dom.prefersReducedMotion();
+
+      if (shouldFade) {
+        renderer.setOpacity(0);
+        await dom.wait(RESIZE_FADE_MS);
+      }
+
+      renderer.resize(width, height, pixelRatio);
+      field.setViewport(width, height);
       effects.setGrid(field.cols, field.rows);
-      if (dom.prefersReducedMotion()) this.frame(0);
+
+      if (dom.prefersReducedMotion()) {
+        this.frame(0);
+      } else if (shouldFade) {
+        this.frame(dom.now());
+      }
+
+      if (shouldFade) renderer.setOpacity(1);
     },
 
     /** Advance the model one step and render the resulting frame. */
