@@ -228,112 +228,160 @@ body {
   }
 }
 
-/* Impressum button + dropdown, anchored to the top-right corner. */
+/* Impressum link, anchored to the top-right corner. Styled as a chip so it
+   still reads as an affordance over the animated backdrop. */
 .impressum {
   position: fixed;
   top: clamp(1rem, 3vw, 2rem);
   right: clamp(1rem, 3vw, 2rem);
   z-index: 20;
-}
-
-.impressum__button {
   font-family: inherit;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--brand-ink);
+  text-decoration: none;
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(16, 16, 20, 0.15);
   border-radius: 0.6rem;
   padding: 0.5rem 1rem;
-  cursor: pointer;
   backdrop-filter: blur(4px);
   transition: background 0.15s ease;
 }
 
-.impressum__button:hover {
+.impressum:hover,
+.impressum:focus-visible {
   background: rgba(255, 255, 255, 1);
 }
 
-.impressum__dropdown {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  width: min(90vw, 420px);
-  max-height: min(75vh, 640px);
-  overflow-y: auto;
-  padding: 0.5rem;
-  background: #ffffff;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 30px rgba(16, 16, 20, 0.2);
-}
-
-.impressum__dropdown > img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
+/* Legal notice page (impressum.html). A plain scrollable document in one
+   readable column — it shares this stylesheet with the landing page, so the
+   fixed full-viewport body above has to be released first. */
+body.legal-page {
   height: auto;
-  border-radius: 0.4rem;
+  min-height: 100%;
+  overflow: auto;
 }
 
-/* Datenschutz / Informationspflicht text, matching the coming-soon card's
-   typography and brand colors. */
-.impressum__legal {
-  padding: 1rem 0.5rem 0.25rem;
-  font-size: 0.82rem;
-  line-height: 1.6;
-  color: rgba(16, 16, 20, 0.75);
+.legal {
+  width: min(100%, 46rem);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 2rem) 4rem;
+  color: rgba(16, 16, 20, 0.78);
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
-.impressum__legal-title {
-  font-size: 1rem;
-  font-weight: 700;
+.legal__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-bottom: 1rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(16, 16, 20, 0.1);
+}
+
+.legal__back {
+  font-weight: 600;
+  color: var(--brand-ink);
+  text-decoration: none;
+}
+
+.legal__back:hover {
+  color: var(--brand-teal);
+}
+
+.legal__nav {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.legal__nav a {
+  color: var(--brand-teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.legal__nav a:hover {
+  text-decoration: underline;
+}
+
+.legal__section + .legal__section {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(16, 16, 20, 0.1);
+}
+
+.legal__title {
+  font-size: clamp(1.6rem, 5vw, 2.1rem);
+  font-weight: 800;
   color: var(--brand-ink);
   margin-bottom: 0.5rem;
 }
 
-.impressum__legal-subtitle {
-  font-weight: 600;
-  color: var(--brand-ink);
-  text-align: center;
-  margin-bottom: 0.75rem;
+.legal__lead {
+  color: rgba(16, 16, 20, 0.6);
+  margin-bottom: 2rem;
 }
 
-.impressum__legal h5 {
-  font-size: 0.9rem;
+.legal h2 {
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--brand-teal);
-  margin-top: 1rem;
-  margin-bottom: 0.4rem;
-}
-
-.impressum__legal p {
+  margin-top: 2rem;
   margin-bottom: 0.6rem;
 }
 
-.impressum__legal ul {
-  margin: 0 0 0.6rem 1.1rem;
+.legal p {
+  margin-bottom: 0.9rem;
 }
 
-.impressum__legal li {
-  margin-bottom: 0.2rem;
+.legal ul {
+  margin: 0 0 0.9rem 1.2rem;
 }
 
-.impressum__legal a {
+.legal li {
+  margin-bottom: 0.25rem;
+}
+
+.legal a {
   color: var(--brand-teal);
   font-weight: 600;
 }
 
-.impressum__legal .impressum__legal-contact-img {
-  display: block;
-  width: 100%;
-  max-width: 260px;
-  height: auto;
-  margin: 0.4rem 0 0.8rem;
-  border-radius: 0.4rem;
-  box-shadow: 0 4px 14px rgba(16, 16, 20, 0.15);
+/* The mandatory disclosures sit in definition lists: label column beside
+   value column, stacking on narrow screens. */
+.legal__data {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) 1fr;
+  gap: 0.4rem 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
-.impressum__legal-source {
-  font-size: 0.75rem;
+.legal__data dt {
+  font-weight: 600;
+  color: var(--brand-ink);
+}
+
+.legal__data dd {
+  margin: 0;
+}
+
+@media (max-width: 34rem) {
+  .legal__data {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .legal__data dd {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.legal__source {
+  margin-top: 2rem;
+  font-size: 0.8rem;
   color: rgba(16, 16, 20, 0.55);
 }
