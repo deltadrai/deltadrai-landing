@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Impressum &amp; Datenschutz – deltadr.ai</title>
+  <!-- Die Pflichtangaben müssen leicht erreichbar sein (§ 5 ECG), aber nicht
+       indexiert. Diese Seite wird daher bewusst aus Suchmaschinen, Archiven und
+       der Bildersuche herausgehalten; ergänzend dazu www/robots.txt. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body class="legal-page">
+  <!-- Firma, Anschrift und E-Mail werden zur Laufzeit aus src/contactData.js
+       dekodiert und von Alpine per x-text gesetzt; im ausgelieferten HTML steht
+       keine maschinenlesbare E-Mail. Die <noscript>-Fallbacks halten die
+       Pflichtangaben auch ohne JavaScript lesbar — die E-Mail dort bewusst nur
+       in der (at)-Schreibweise. -->
+  <div class="legal" x-data="impressumViewModel()">
+    <header class="legal__header">
+      <a class="legal__back" href="index.html">&larr;&nbsp;Zurück zu deltadr.ai</a>
+      <nav class="legal__nav">
+        <a href="#impressum">Impressum</a>
+        <a href="#datenschutz">Datenschutz</a>
+      </nav>
+    </header>
+
+    <main class="legal__content">
+      <section class="legal__section" id="impressum">
+        <h1 class="legal__title">Impressum</h1>
+        <p class="legal__lead">
+          Offenlegung gemäß § 5 E-Commerce-Gesetz, § 14 Unternehmensgesetzbuch und § 25 Mediengesetz.
+        </p>
+
+        <h2>Medieninhaber, Herausgeber und Diensteanbieter</h2>
+        <!-- UID-Nummer: derzeit keine vergeben. Sobald das Finanzamt eine
+             ATU-Nummer erteilt, ist sie hier als weitere Zeile zu ergänzen
+             (§ 5 Abs 1 Z 6 ECG). -->
+        <dl class="legal__data">
+          <dt>Firma</dt>
+          <dd x-text="company"><noscript>deltadrai GmbH</noscript></dd>
+
+          <dt>Rechtsform</dt>
+          <dd>Gesellschaft mit beschränkter Haftung (GmbH)</dd>
+
+          <dt>Anschrift</dt>
+          <dd>
+            <span x-text="street"><noscript>Adalbert-Stifter-Straße 4</noscript></span><br />
+            <span x-text="city"><noscript>4710 Grieskirchen</noscript></span><br />
+            <span x-text="country"><noscript>Österreich</noscript></span>
+          </dd>
+
+          <dt>Sitz</dt>
+          <dd>Grieskirchen, Österreich</dd>
+
+          <dt>Firmenbuchnummer</dt>
+          <dd>FN 687133 s</dd>
+
+          <dt>Firmenbuchgericht</dt>
+          <dd>Landesgericht Wels</dd>
+
+          <dt>E-Mail</dt>
+          <dd x-text="email"><noscript>impressum (at) deltadr.ai</noscript></dd>
+        </dl>
+
+        <h2>Geschäftsführung</h2>
+        <p>Vertretungsbefugte Geschäftsführerinnen und Geschäftsführer:</p>
+        <ul>
+          <li>Sandra Mager, BSc. MSc.</li>
+          <li>Ing. DI Dr. Armin Winter</li>
+          <li>Markus Winter, BSc.</li>
+        </ul>
+
+        <h2>Gewerbe und Aufsicht</h2>
+        <!-- VOR LIVEGANG ERSETZEN: [[GEWERBEBEZEICHNUNG]] und [[BERUFSBEZEICHNUNG]]
+             laut Gewerbeschein. Bei einem reglementierten Gewerbe verlangt
+             § 5 Abs 1 Z 5 ECG zusätzlich die Berufsbezeichnung samt Verleihungsstaat. -->
+        <dl class="legal__data">
+          <dt>Gewerbe</dt>
+          <dd>[[GEWERBEBEZEICHNUNG]] (reglementiertes Gewerbe)</dd>
+
+          <dt>Berufsbezeichnung</dt>
+          <dd>[[BERUFSBEZEICHNUNG]], verliehen in Österreich</dd>
+
+          <dt>Berufsrecht</dt>
+          <dd>
+            Gewerbeordnung 1994, abrufbar unter
+            <a href="https://www.ris.bka.gv.at" target="_blank" rel="noopener noreferrer nofollow">ris.bka.gv.at</a>
+          </dd>
+
+          <dt>Gewerbebehörde</dt>
+          <dd>Bezirkshauptmannschaft Grieskirchen</dd>
+
+          <dt>Kammer</dt>
+          <dd>Wirtschaftskammer Oberösterreich</dd>
+        </dl>
+
+        <h2>Unternehmensgegenstand und Blattlinie</h2>
+        <p>
+          Entwicklung und Vertrieb von Lösungen, die Rechenlasten für künstliche Intelligenz mit
+          nachhaltiger Wärmenutzung verbinden. Diese Website informiert über das Unternehmen sowie
+          über seine Produkte und Dienstleistungen.
+        </p>
+
+        <h2>Verbraucherstreitbeilegung</h2>
+        <p>
+          Wir sind weder verpflichtet noch bereit, an einem Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+        <!-- Kein Link auf die EU-Plattform zur Online-Streitbeilegung: sie wurde am
+             20. Juli 2025 endgültig abgeschaltet. Bitte nicht wieder aufnehmen. -->
+
+        <h2>Haftung und Urheberrecht</h2>
+        <p>
+          Wir erstellen die Inhalte dieser Website mit Sorgfalt, können für Richtigkeit,
+          Vollständigkeit und Aktualität aber keine Gewähr übernehmen. Für die Inhalte externer
+          Websites, auf die wir verlinken, ist ausschließlich deren Betreiber verantwortlich.
+        </p>
+        <p>
+          Alle Inhalte dieser Website sind urheberrechtlich geschützt. Jede Verwertung außerhalb der
+          gesetzlich erlaubten Grenzen bedarf unserer vorherigen Zustimmung.
+        </p>
+        <p>
+          Wir behalten uns die Rechte zum Text- und Data-Mining ausdrücklich vor (§ 42h Abs 5 UrhG,
+          Art. 4 Abs 3 der Richtlinie (EU) 2019/790). Dieser Vorbehalt gilt insbesondere für das
+          automatisierte Auslesen dieser Website zum Training oder Betrieb von KI-Systemen und wird
+          zusätzlich maschinenlesbar in unserer
+          <a href="robots.txt" rel="nofollow">robots.txt</a> erklärt.
+        </p>
+
+        <h2>Nutzung der Kontaktdaten</h2>
+        <p>
+          Die Nutzung der hier veröffentlichten Kontaktdaten zur Zusendung nicht ausdrücklich
+          angeforderter Werbung ist untersagt. Wir widersprechen einer solchen Verwendung
+          ausdrücklich (§ 107 TKG 2021, Art. 21 DSGVO) und behalten uns rechtliche Schritte vor.
+        </p>
+      </section>
+
+      <section class="legal__section" id="datenschutz">
+        <h1 class="legal__title">Datenschutzerklärung</h1>
+        <p class="legal__lead">
+          Nachfolgend informieren wir Sie über die wichtigsten Aspekte der Datenverarbeitung auf
+          dieser Website. Wir verarbeiten personenbezogene Daten ausschließlich auf Grundlage der
+          gesetzlichen Bestimmungen (DSGVO, Datenschutzgesetz, Telekommunikationsgesetz 2021).
+        </p>
+
+        <h2>Verantwortlicher</h2>
+        <dl class="legal__data">
+          <dt>Verantwortlicher</dt>
+          <dd x-text="company"><noscript>deltadrai GmbH</noscript></dd>
+
+          <dt>Anschrift</dt>
+          <dd>
+            <span x-text="street"><noscript>Adalbert-Stifter-Straße 4</noscript></span>,
+            <span x-text="city"><noscript>4710 Grieskirchen</noscript></span>,
+            <span x-text="country"><noscript>Österreich</noscript></span>
+          </dd>
+
+          <dt>E-Mail</dt>
+          <dd x-text="email"><noscript>impressum (at) deltadr.ai</noscript></dd>
+        </dl>
+
+        <h2>Zugriffsdaten und Server-Log-Files</h2>
+        <p>
+          Diese Website wird von GitHub, Inc. (GitHub Pages, 88 Colin P. Kelly Jr. Street,
+          San Francisco, CA 94107, USA) gehostet. Beim Aufruf erhebt der Hoster technisch bedingt
+          Zugriffsdaten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, verwendeten Browser
+          und Betriebssystem. Rechtsgrundlage ist unser berechtigtes Interesse am sicheren und
+          stabilen Betrieb der Website (Art. 6 Abs 1 lit f DSGVO). Wir selbst führen diese Daten
+          nicht mit anderen Datenquellen zusammen und werten sie nicht personenbezogen aus.
+        </p>
+
+        <h2>Warteliste</h2>
+        <p>
+          Wenn Sie sich über das Formular auf der Startseite in unsere Warteliste eintragen,
+          verarbeiten wir Ihre E-Mail-Adresse, um Sie über den Start unseres Angebots zu
+          informieren. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs 1 lit a DSGVO), die Sie
+          jederzeit mit Wirkung für die Zukunft widerrufen können — eine formlose Nachricht an die
+          oben genannte E-Mail-Adresse genügt. Wir speichern Ihre Adresse bis zum Widerruf,
+          längstens jedoch bis zum Wegfall des Zwecks.
+        </p>
+        <p>
+          Für den Versand des Formulars setzen wir den Dienst Formspree (Formspree, Inc., USA) als
+          Auftragsverarbeiter ein. Dabei werden Ihre E-Mail-Adresse und technische Metadaten in die
+          USA übermittelt. Die Übermittlung stützt sich auf [[FORMSPREE_TRANSFERGRUNDLAGE]].
+        </p>
+        <!-- VOR LIVEGANG ERSETZEN: [[FORMSPREE_TRANSFERGRUNDLAGE]] — je nach aktuellem
+             Stand entweder "die Zertifizierung von Formspree unter dem EU-US Data
+             Privacy Framework (Angemessenheitsbeschluss der Europäischen Kommission)"
+             oder "Standardvertragsklauseln gemäß Art. 46 Abs 2 lit c DSGVO".
+             Der Endpoint ist in src/main.js hinterlegt; bitte den Zertifizierungsstatus
+             und den abgeschlossenen Auftragsverarbeitungsvertrag prüfen. -->
+
+        <h2>Kontaktaufnahme</h2>
+        <p>
+          Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir die von Ihnen übermittelten Daten
+          zur Bearbeitung Ihrer Anfrage und für den Fall von Anschlussfragen (Art. 6 Abs 1 lit b
+          bzw. lit f DSGVO). Ohne Ihre Einwilligung geben wir diese Daten nicht weiter.
+        </p>
+
+        <h2>Ihre Rechte</h2>
+        <p>Ihnen stehen hinsichtlich Ihrer bei uns gespeicherten Daten folgende Rechte zu:</p>
+        <ul>
+          <li>Auskunft (Art. 15 DSGVO)</li>
+          <li>Berichtigung (Art. 16 DSGVO)</li>
+          <li>Löschung (Art. 17 DSGVO)</li>
+          <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+          <li>Widerspruch (Art. 21 DSGVO) sowie Widerruf erteilter Einwilligungen (Art. 7 Abs 3 DSGVO)</li>
+        </ul>
+        <p>
+          Wenden Sie sich dafür an die oben genannte E-Mail-Adresse. Wenn Sie glauben, dass die
+          Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt, können Sie sich bei der
+          Österreichischen Datenschutzbehörde beschweren: Barichgasse 40–42, 1030 Wien,
+          <a href="https://www.dsb.gv.at" target="_blank" rel="noopener noreferrer nofollow">dsb.gv.at</a>.
+        </p>
+
+        <p class="legal__source">
+          Teile dieses Datenschutztextes beruhen auf einer Vorlage von fairesrecht.at in Kooperation
+          mit
+          <a href="https://rechtsanwaltwien.com" target="_blank" rel="noopener noreferrer nofollow"><strong>Rechtsanwalt Wien</strong></a>.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

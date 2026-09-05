@@ -12,6 +12,8 @@ import { CanvasRenderer } from './canvasRenderer.js';
 import { createWaveFieldViewModel } from './waveFieldViewModel.js';
 import { FormspreeClient } from './formspreeClient.js';
 import { createWaitlistViewModel } from './waitlistViewModel.js';
+import { CONTACT, decode } from './contactData.js';
+import { createImpressumViewModel } from './impressumViewModel.js';
 
 // Adapter over the real window (the single point of contact with a browser global).
 const domAdapter = new DomAdapter(window);
@@ -40,6 +42,12 @@ const formspreeClient = new FormspreeClient(window.fetch.bind(window), FORMSPREE
 Alpine.data('waitlistViewModel', () =>
   createWaitlistViewModel({ client: formspreeClient, staffMessage: WAITLIST_STAFF_MESSAGE }),
 );
+
+// Legal notice page (impressum.html). This file stays the single composition
+// root for both pages: registering a factory has no side effect, and the
+// wave/waitlist Models above are simply never instantiated on a page that
+// carries no matching x-data.
+Alpine.data('impressumViewModel', () => createImpressumViewModel({ contact: CONTACT, decode }));
 
 window.Alpine = Alpine;
 Alpine.start();
