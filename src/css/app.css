@@ -1,0 +1,51 @@
+@import "tailwindcss" source("../");
+
+/* 1. Custom variants (Tailwind-native extension points) */
+@custom-variant js (&:where(.js *));                                    /* JS-enhanced only */
+@custom-variant htmx-request (&:where(.htmx-request, .htmx-request *)); /* loading state */
+
+/* 2. Design tokens */
+@theme {
+  --font-sans: "Poppins", "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-brand-ink: #101014;
+  /* Decorative teal: mesh, logo mark. Too light for text (2.3:1 on white). */
+  --color-brand-teal: #7fb4a8;
+  /* Accessible teal for text, controls and focus rings (5.0:1 on white). */
+  --color-brand-teal-700: #3a7a6c;
+  --color-brand-teal-800: #2f6a5d;
+  --color-success-700: #2f7d5e;
+  --color-alert-600: #c0392b;
+
+  /* Page-edge inset shared by the corner-anchored footer links. */
+  --spacing-edge: clamp(1rem, 3vw, 2rem);
+}
+
+/* 3. Self-hosted Google Fonts (copied from @fontsource/poppins by scripts/build.mjs) */
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins-latin-800-normal.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+
+/* 4. Documented exceptions (no Tailwind equivalent) */
+[x-cloak] { display: none !important; }

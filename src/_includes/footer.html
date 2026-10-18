@@ -1,0 +1,37 @@
+<!-- Legal links, linked on every page and never loaded lazily. Anchored top-right as a
+     chip so they still read as an affordance over the animated backdrop. The nav is a
+     link-only container, so it carries the boost attribute set (architecture §8.3). -->
+<footer
+  lang="de"
+  class="fixed top-edge right-edge z-20 flex flex-col items-end gap-2"
+  x-data="siteNav"
+  @htmx:after-settle.window="refresh()"
+>
+  <nav
+    aria-label="Legal"
+    hx-boost="true"
+    hx-target="#page"
+    hx-select="#page"
+    hx-swap="outerHTML swap:300ms"
+    class="flex gap-2"
+  >
+    <a
+      href="/impressum/"
+      :aria-current="current($el.pathname)"
+      class="rounded-[0.6rem] border border-brand-ink/15 bg-white/85 px-4 py-2 text-[0.95rem] font-semibold text-brand-ink backdrop-blur-xs transition-colors duration-200 hover:bg-white focus-visible:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal-700 aria-[current=page]:text-brand-teal-700"
+      >Impressum</a
+    >
+    <a
+      href="/datenschutz/"
+      :aria-current="current($el.pathname)"
+      class="rounded-[0.6rem] border border-brand-ink/15 bg-white/85 px-4 py-2 text-[0.95rem] font-semibold text-brand-ink backdrop-blur-xs transition-colors duration-200 hover:bg-white focus-visible:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal-700 aria-[current=page]:text-brand-teal-700"
+      >Datenschutz</a
+    >
+  </nav>
+  <!-- Own-origin failures (a boosted page that did not load) are announced here. -->
+  <p
+    role="status"
+    data-fragment-status
+    class="max-w-xs rounded-[0.6rem] bg-white/90 px-3 py-2 text-sm font-semibold text-alert-600 empty:hidden"
+  ></p>
+</footer>

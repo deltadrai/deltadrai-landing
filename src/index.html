@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- @include head-security.html -->
+    <title>deltadr.ai</title>
+    <!-- @include head-assets.html -->
+  </head>
+  <body class="h-full w-full overflow-hidden bg-white font-sans text-brand-ink">
+    <!-- @include backdrop.html -->
+
+    <!-- Coming-soon waitlist block, centered over the wave backdrop. -->
+    <main id="page" tabindex="-1" lang="en" class="fixed inset-0 z-5 overflow-y-auto outline-none">
+      <div
+        class="flex min-h-full items-center justify-center px-4 pt-[5.5rem] pb-28 min-[481px]:px-[clamp(1.25rem,5vw,3rem)] min-[481px]:pt-24 min-[481px]:pb-32"
+      >
+        <div
+          class="w-full max-w-[640px] rounded-3xl bg-white/82 p-[clamp(1.75rem,4vw,3rem)] text-center shadow-[0_20px_60px_rgba(16,16,20,0.12)] backdrop-blur-[6px]"
+        >
+          <h1
+            tabindex="-1"
+            class="mb-4 text-[length:clamp(1.9rem,4.5vw,3rem)] font-extrabold text-brand-ink outline-none"
+          >
+            Coming <span class="text-brand-teal-700">soon</span>
+          </h1>
+          <p class="mb-4 text-[length:clamp(1rem,2.2vw,1.15rem)] leading-[1.6] text-brand-ink/75">
+            We're working on an exceptional experience that will transform the way you think about
+            heating and processing AI workloads in a sustainable manner. Innovative components,
+            seamless integration, and unmatched design quality.
+          </p>
+          <p class="mb-7 font-semibold text-brand-ink">
+            Join the waitlist to get an exclusive early glimpse.
+          </p>
+
+          <!-- @include ../partials/forms/waitlist.html -->
+        </div>
+      </div>
+
+      <!-- Logo lockup, anchored bottom-left as in the reference artwork. The wordmark is
+         real text, so the mark itself is decorative. -->
+      <div
+        class="fixed bottom-[clamp(1.25rem,4vw,3.5rem)] left-[clamp(1.25rem,4vw,4rem)] z-10 flex items-center gap-[clamp(0.5rem,1.6vw,1.1rem)] rounded-2xl bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.7)_55%,rgba(255,255,255,0)_100%)] px-[0.6rem] py-[0.4rem]"
+      >
+        <svg
+          class="block h-[clamp(2.4rem,6vw,4.75rem)] w-auto fill-brand-teal"
+          viewBox="0 0 479 436"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M 249,2 L 245,0 L 235,0 L 228,4 L 138,164 L 134,174 L 134,181 L 137,188 L 142,193 L 150,196 L 314,196 L 315,197 L 247,272 L 242,283 L 243,291 L 249,299 L 257,302 L 328,302 L 340,305 L 352,311 L 365,325 L 372,343 L 372,361 L 367,376 L 364,381 L 350,394 L 327,402 L 48,402 L 47,401 L 148,218 L 109,218 L 1,412 L 1,426 L 10,435 L 331,436 L 353,431 L 369,423 L 381,414 L 395,397 L 405,373 L 407,361 L 407,342 L 403,324 L 391,301 L 373,284 L 354,274 L 329,268 L 297,267 L 364,192 L 369,182 L 369,176 L 366,169 L 361,164 L 353,161 L 180,161 L 240,53 L 289,140 L 327,140 L 256,10 Z
+                 M 429,348 L 429,366 L 422,392 L 407,417 L 386,436 L 479,436 Z"
+          />
+        </svg>
+        <span
+          class="inline-flex items-baseline text-[length:clamp(1.6rem,9vw,2.4rem)] leading-none tracking-[-0.01em] whitespace-nowrap min-[481px]:text-[length:clamp(2rem,5vw,4rem)]"
+        >
+          <span class="font-normal text-brand-ink">delta</span
+          ><span class="font-extrabold text-brand-ink">dr</span
+          ><span class="font-extrabold text-brand-teal">.ai</span>
+        </span>
+      </div>
+    </main>
+
+    <!-- @include footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

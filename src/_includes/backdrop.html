@@ -1,0 +1,7 @@
+<!-- Animated wave mesh backdrop. Reusable on any page: the waveBackdrop ViewModel
+     (js/viewmodels/wave-backdrop.js) starts in init(), and Alpine propagates the
+     window resize into sync(). Placed outside #page so it persists across boosted
+     navigation. -->
+<div x-data="waveBackdrop" @resize.window.debounce.150ms="sync()" aria-hidden="true">
+  <canvas x-ref="canvas" class="pointer-events-none fixed inset-0 z-0 block size-full"></canvas>
+</div>

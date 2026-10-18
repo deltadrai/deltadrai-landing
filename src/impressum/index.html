@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- @include head-security.html -->
+    <title>Impressum – deltadr.ai</title>
+    <!-- Die Pflichtangaben müssen leicht erreichbar sein (§ 5 ECG), aber nicht
+       indexiert. Diese Seite wird daher bewusst aus Suchmaschinen, Archiven und
+       der Bildersuche herausgehalten; ergänzend dazu src/robots.txt. -->
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
+    <!-- @include head-assets.html -->
+  </head>
+  <body class="h-full w-full overflow-hidden bg-white font-sans text-brand-ink">
+    <!-- @include backdrop.html -->
+
+    <main id="page" tabindex="-1" lang="de" class="fixed inset-0 z-5 overflow-y-auto outline-none">
+      <div class="mx-auto w-[min(100%,46rem)] px-[clamp(1.25rem,5vw,2rem)] pt-20 pb-16">
+        <article
+          class="rounded-3xl bg-white/90 p-[clamp(1.25rem,4vw,3rem)] text-[0.95rem] leading-[1.65] text-brand-ink/80 backdrop-blur-[6px]"
+          x-data="contact"
+        >
+          <!-- Firma, Anschrift und E-Mail werden zur Laufzeit aus config.contact (src/js/config.js)
+             dekodiert und von Alpine per x-text gesetzt; im ausgelieferten HTML steht
+             keine maschinenlesbare E-Mail. Die <noscript>-Fallbacks halten die
+             Pflichtangaben auch ohne JavaScript lesbar — die E-Mail dort bewusst nur
+             in der (at)-Schreibweise. -->
+          <header class="mb-10 border-b border-brand-ink/10 pb-4">
+            <nav hx-boost="true" hx-target="#page" hx-select="#page" hx-swap="outerHTML swap:300ms">
+              <a
+                href="/"
+                class="font-semibold text-brand-ink transition-colors duration-200 hover:text-brand-teal-700"
+                >&larr;&nbsp;Zurück zu deltadr.ai</a
+              >
+            </nav>
+          </header>
+
+          <h1
+            tabindex="-1"
+            class="mb-2 text-[length:clamp(1.6rem,5vw,2.1rem)] font-extrabold text-brand-ink outline-none"
+          >
+            Impressum
+          </h1>
+          <p class="mb-8 text-brand-ink/70">
+            Offenlegung gemäß § 5 E-Commerce-Gesetz, § 14 Unternehmensgesetzbuch und § 25
+            Mediengesetz.
+          </p>
+
+          <div
+            class="[&_a]:font-semibold [&_a]:text-brand-teal-700 [&_dd]:mb-3 min-[34rem]:[&_dd]:mb-0 [&_dl]:mb-5 [&_dl]:grid [&_dl]:grid-cols-1 [&_dl]:gap-y-[0.1rem] min-[34rem]:[&_dl]:grid-cols-[minmax(9rem,14rem)_1fr] min-[34rem]:[&_dl]:gap-x-6 min-[34rem]:[&_dl]:gap-y-[0.4rem] [&_dt]:font-semibold [&_dt]:text-brand-ink [&_h2]:mt-8 [&_h2]:mb-[0.6rem] [&_h2]:text-[1.05rem] [&_h2]:font-bold [&_h2]:text-brand-teal-700 [&_li]:mb-1 [&_p]:mb-[0.9rem] [&_ul]:mb-[0.9rem] [&_ul]:ml-[1.2rem] [&_ul]:list-disc"
+          >
+            <h2>Medieninhaber, Herausgeber und Diensteanbieter</h2>
+            <!-- UID-Nummer: derzeit keine vergeben. Sobald das Finanzamt eine
+             ATU-Nummer erteilt, ist sie hier als weitere Zeile zu ergänzen
+             (§ 5 Abs 1 Z 6 ECG). -->
+            <dl>
+              <dt>Firma</dt>
+              <dd x-text="company"><noscript>deltadrai GmbH</noscript></dd>
+
+              <dt>Rechtsform</dt>
+              <dd>Gesellschaft mit beschränkter Haftung (GmbH)</dd>
+
+              <dt>Anschrift</dt>
+              <dd>
+                <span x-text="street"><noscript>Adalbert-Stifter-Straße 4</noscript></span
+                ><br />
+                <span x-text="city"><noscript>4710 Grieskirchen</noscript></span
+                ><br />
+                <span x-text="country"><noscript>Österreich</noscript></span>
+              </dd>
+
+              <dt>Sitz</dt>
+              <dd>Grieskirchen, Österreich</dd>
+
+              <dt>Firmenbuchnummer</dt>
+              <dd>FN 687133 s</dd>
+
+              <dt>Firmenbuchgericht</dt>
+              <dd>Landesgericht Wels</dd>
+
+              <dt>E-Mail</dt>
+              <dd x-text="email"><noscript>impressum (at) deltadr.ai</noscript></dd>
+            </dl>
+
+            <h2>Geschäftsführung</h2>
+            <p>Vertretungsbefugte Geschäftsführerinnen und Geschäftsführer:</p>
+            <ul>
+              <li>Sandra Mager, BSc. MSc.</li>
+              <li>Ing. DI Dr. Armin Winter</li>
+              <li>Markus Winter, BSc.</li>
+            </ul>
+
+            <h2>Gewerbe und Aufsicht</h2>
+            <!-- VOR LIVEGANG ERSETZEN: [[GEWERBEBEZEICHNUNG]] und [[BERUFSBEZEICHNUNG]]
+             laut Gewerbeschein. Bei einem reglementierten Gewerbe verlangt
+             § 5 Abs 1 Z 5 ECG zusätzlich die Berufsbezeichnung samt Verleihungsstaat. -->
+            <dl>
+              <dt>Gewerbe</dt>
+              <dd>[[GEWERBEBEZEICHNUNG]] (reglementiertes Gewerbe)</dd>
+
+              <dt>Berufsbezeichnung</dt>
+              <dd>[[BERUFSBEZEICHNUNG]], verliehen in Österreich</dd>
+
+              <dt>Berufsrecht</dt>
+              <dd>
+                Gewerbeordnung 1994, abrufbar unter
+                <a
+                  href="https://www.ris.bka.gv.at"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  >ris.bka.gv.at</a
+                >
+              </dd>
+
+              <dt>Gewerbebehörde</dt>
+              <dd>Bezirkshauptmannschaft Grieskirchen</dd>
+
+              <dt>Kammer</dt>
+              <dd>Wirtschaftskammer Oberösterreich</dd>
+            </dl>
+
+            <h2>Unternehmensgegenstand und Blattlinie</h2>
+            <p>
+              Entwicklung und Vertrieb von Lösungen, die Rechenlasten für künstliche Intelligenz mit
+              nachhaltiger Wärmenutzung verbinden. Diese Website informiert über das Unternehmen
+              sowie über seine Produkte und Dienstleistungen.
+            </p>
+
+            <h2>Verbraucherstreitbeilegung</h2>
+            <p>
+              Wir sind weder verpflichtet noch bereit, an einem Streitbeilegungsverfahren vor einer
+              Verbraucherschlichtungsstelle teilzunehmen.
+            </p>
+            <!-- Kein Link auf die EU-Plattform zur Online-Streitbeilegung: sie wurde am
+             20. Juli 2025 endgültig abgeschaltet. Bitte nicht wieder aufnehmen. -->
+
+            <h2>Haftung und Urheberrecht</h2>
+            <p>
+              Wir erstellen die Inhalte dieser Website mit Sorgfalt, können für Richtigkeit,
+              Vollständigkeit und Aktualität aber keine Gewähr übernehmen. Für die Inhalte externer
+              Websites, auf die wir verlinken, ist ausschließlich deren Betreiber verantwortlich.
+            </p>
+            <p>
+              Alle Inhalte dieser Website sind urheberrechtlich geschützt. Jede Verwertung außerhalb
+              der gesetzlich erlaubten Grenzen bedarf unserer vorherigen Zustimmung.
+            </p>
+            <p>
+              Wir behalten uns die Rechte zum Text- und Data-Mining ausdrücklich vor (§ 42h Abs 5
+              UrhG, Art. 4 Abs 3 der Richtlinie (EU) 2019/790). Dieser Vorbehalt gilt insbesondere
+              für das automatisierte Auslesen dieser Website zum Training oder Betrieb von
+              KI-Systemen und wird zusätzlich maschinenlesbar in unserer
+              <a href="/robots.txt" rel="nofollow">robots.txt</a> erklärt.
+            </p>
+
+            <h2>Nutzung der Kontaktdaten</h2>
+            <p>
+              Die Nutzung der hier veröffentlichten Kontaktdaten zur Zusendung nicht ausdrücklich
+              angeforderter Werbung ist untersagt. Wir widersprechen einer solchen Verwendung
+              ausdrücklich (§ 107 TKG 2021, Art. 21 DSGVO) und behalten uns rechtliche Schritte vor.
+            </p>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- @include footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

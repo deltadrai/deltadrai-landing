@@ -1,0 +1,25 @@
+{
+  "name": "deltadrai-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:html": "node scripts/build.mjs",
+    "build:css": "tailwindcss -i src/css/app.css -o _site/css/app.css --minify",
+    "build": "npm run build:html && npm run build:css",
+    "dev": "npm run build && (node scripts/build.mjs --watch & tailwindcss -i src/css/app.css -o _site/css/app.css --watch & serve _site)",
+    "test": "node --test",
+    "format": "prettier --write \"src/**/*.{html,js}\""
+  },
+  "devDependencies": {
+    "@fontsource/poppins": "5.3.0",
+    "@tailwindcss/cli": "4.3.3",
+    "alpinejs": "3.17.4",
+    "gsap": "3.15.0",
+    "htmx.org": "2.0.11",
+    "jsdom": "30.1.1",
+    "prettier": "3.9.9",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "serve": "14.2.6",
+    "tailwindcss": "4.3.3"
+  }
+}

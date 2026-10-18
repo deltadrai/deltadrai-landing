@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="de" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- @include head-security.html -->
+    <title>Datenschutzerklärung – deltadr.ai</title>
+    <!-- Wie das Impressum: leicht erreichbar, aber nicht indexiert. -->
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex" />
+    <!-- @include head-assets.html -->
+  </head>
+  <body class="h-full w-full overflow-hidden bg-white font-sans text-brand-ink">
+    <!-- @include backdrop.html -->
+
+    <main id="page" tabindex="-1" lang="de" class="fixed inset-0 z-5 overflow-y-auto outline-none">
+      <div class="mx-auto w-[min(100%,46rem)] px-[clamp(1.25rem,5vw,2rem)] pt-20 pb-16">
+        <article
+          class="rounded-3xl bg-white/90 p-[clamp(1.25rem,4vw,3rem)] text-[0.95rem] leading-[1.65] text-brand-ink/80 backdrop-blur-[6px]"
+          x-data="contact"
+        >
+          <!-- Firma, Anschrift und E-Mail werden zur Laufzeit aus config.contact (src/js/config.js)
+             dekodiert und von Alpine per x-text gesetzt; im ausgelieferten HTML steht
+             keine maschinenlesbare E-Mail. Die <noscript>-Fallbacks halten die
+             Pflichtangaben auch ohne JavaScript lesbar — die E-Mail dort bewusst nur
+             in der (at)-Schreibweise. -->
+          <header class="mb-10 border-b border-brand-ink/10 pb-4">
+            <nav hx-boost="true" hx-target="#page" hx-select="#page" hx-swap="outerHTML swap:300ms">
+              <a
+                href="/"
+                class="font-semibold text-brand-ink transition-colors duration-200 hover:text-brand-teal-700"
+                >&larr;&nbsp;Zurück zu deltadr.ai</a
+              >
+            </nav>
+          </header>
+
+          <h1
+            tabindex="-1"
+            class="mb-2 text-[length:clamp(1.6rem,5vw,2.1rem)] font-extrabold text-brand-ink outline-none"
+          >
+            Datenschutzerklärung
+          </h1>
+          <p class="mb-8 text-brand-ink/70">
+            Nachfolgend informieren wir Sie über die wichtigsten Aspekte der Datenverarbeitung auf
+            dieser Website. Wir verarbeiten personenbezogene Daten ausschließlich auf Grundlage der
+            gesetzlichen Bestimmungen (DSGVO, Datenschutzgesetz, Telekommunikationsgesetz 2021).
+          </p>
+
+          <div
+            class="[&_a]:font-semibold [&_a]:text-brand-teal-700 [&_dd]:mb-3 min-[34rem]:[&_dd]:mb-0 [&_dl]:mb-5 [&_dl]:grid [&_dl]:grid-cols-1 [&_dl]:gap-y-[0.1rem] min-[34rem]:[&_dl]:grid-cols-[minmax(9rem,14rem)_1fr] min-[34rem]:[&_dl]:gap-x-6 min-[34rem]:[&_dl]:gap-y-[0.4rem] [&_dt]:font-semibold [&_dt]:text-brand-ink [&_h2]:mt-8 [&_h2]:mb-[0.6rem] [&_h2]:text-[1.05rem] [&_h2]:font-bold [&_h2]:text-brand-teal-700 [&_li]:mb-1 [&_p]:mb-[0.9rem] [&_ul]:mb-[0.9rem] [&_ul]:ml-[1.2rem] [&_ul]:list-disc"
+          >
+            <h2>Verantwortlicher</h2>
+            <dl>
+              <dt>Verantwortlicher</dt>
+              <dd x-text="company"><noscript>deltadrai GmbH</noscript></dd>
+
+              <dt>Anschrift</dt>
+              <dd>
+                <span x-text="street"><noscript>Adalbert-Stifter-Straße 4</noscript></span
+                >, <span x-text="city"><noscript>4710 Grieskirchen</noscript></span
+                >,
+                <span x-text="country"><noscript>Österreich</noscript></span>
+              </dd>
+
+              <dt>E-Mail</dt>
+              <dd x-text="email"><noscript>impressum (at) deltadr.ai</noscript></dd>
+            </dl>
+
+            <h2>Zugriffsdaten und Server-Log-Files</h2>
+            <p>
+              Diese Website wird von GitHub, Inc. (GitHub Pages, 88 Colin P. Kelly Jr. Street, San
+              Francisco, CA 94107, USA) gehostet. Beim Aufruf erhebt der Hoster technisch bedingt
+              Zugriffsdaten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, verwendeten
+              Browser und Betriebssystem. Rechtsgrundlage ist unser berechtigtes Interesse am
+              sicheren und stabilen Betrieb der Website (Art. 6 Abs 1 lit f DSGVO). Wir selbst
+              führen diese Daten nicht mit anderen Datenquellen zusammen und werten sie nicht
+              personenbezogen aus.
+            </p>
+
+            <h2>Schriftarten, Skripte und Cookies</h2>
+            <p>
+              Schriftarten und Skripte werden von unserem eigenen Server ausgeliefert. Beim Aufruf
+              dieser Website werden keine Daten an Dritte wie Google-Fonts- oder CDN-Anbieter
+              übertragen. Wir setzen keine Cookies, keine Analyse- und keine Tracking-Dienste ein.
+              Erst wenn Sie das Formular absenden, wird der Dienst Formspree kontaktiert (siehe
+              unten).
+            </p>
+
+            <h2>Warteliste</h2>
+            <p>
+              Wenn Sie sich über das Formular auf der Startseite in unsere Warteliste eintragen,
+              verarbeiten wir Ihre E-Mail-Adresse, um Sie über den Start unseres Angebots zu
+              informieren. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs 1 lit a DSGVO), die Sie
+              jederzeit mit Wirkung für die Zukunft widerrufen können — eine formlose Nachricht an
+              die oben genannte E-Mail-Adresse genügt. Wir speichern Ihre Adresse bis zum Widerruf,
+              längstens jedoch bis zum Wegfall des Zwecks.
+            </p>
+            <p>
+              Für den Versand des Formulars setzen wir den Dienst Formspree (Formspree, Inc., USA)
+              als Auftragsverarbeiter ein. Dabei werden Ihre E-Mail-Adresse und technische Metadaten
+              in die USA übermittelt. Die Übermittlung stützt sich auf
+              [[FORMSPREE_TRANSFERGRUNDLAGE]].
+            </p>
+            <!-- VOR LIVEGANG ERSETZEN: [[FORMSPREE_TRANSFERGRUNDLAGE]] — je nach aktuellem
+             Stand entweder "die Zertifizierung von Formspree unter dem EU-US Data
+             Privacy Framework (Angemessenheitsbeschluss der Europäischen Kommission)"
+             oder "Standardvertragsklauseln gemäß Art. 46 Abs 2 lit c DSGVO".
+             Der Endpoint ist im Formular (src/partials/forms/waitlist.html) hinterlegt; bitte den Zertifizierungsstatus
+             und den abgeschlossenen Auftragsverarbeitungsvertrag prüfen. -->
+
+            <h2>Kontaktaufnahme</h2>
+            <p>
+              Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir die von Ihnen übermittelten
+              Daten zur Bearbeitung Ihrer Anfrage und für den Fall von Anschlussfragen (Art. 6 Abs 1
+              lit b bzw. lit f DSGVO). Ohne Ihre Einwilligung geben wir diese Daten nicht weiter.
+            </p>
+
+            <h2>Ihre Rechte</h2>
+            <p>Ihnen stehen hinsichtlich Ihrer bei uns gespeicherten Daten folgende Rechte zu:</p>
+            <ul>
+              <li>Auskunft (Art. 15 DSGVO)</li>
+              <li>Berichtigung (Art. 16 DSGVO)</li>
+              <li>Löschung (Art. 17 DSGVO)</li>
+              <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+              <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+              <li>
+                Widerspruch (Art. 21 DSGVO) sowie Widerruf erteilter Einwilligungen (Art. 7 Abs 3
+                DSGVO)
+              </li>
+            </ul>
+            <p>
+              Wenden Sie sich dafür an die oben genannte E-Mail-Adresse. Wenn Sie glauben, dass die
+              Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt, können Sie sich bei der
+              Österreichischen Datenschutzbehörde beschweren: Barichgasse 40–42, 1030 Wien,
+              <a href="https://www.dsb.gv.at" target="_blank" rel="noopener noreferrer nofollow"
+                >dsb.gv.at</a
+              >.
+            </p>
+
+            <p class="mt-8 text-[0.8rem] text-brand-ink/70">
+              Teile dieses Datenschutztextes beruhen auf einer Vorlage von fairesrecht.at in
+              Kooperation mit
+              <a
+                href="https://rechtsanwaltwien.com"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                ><strong>Rechtsanwalt Wien</strong></a
+              >.
+            </p>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- @include footer.html -->
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
