@@ -1,0 +1,8 @@
+<!-- Content Security Policy. Every allowlisted off-site origin appears in BOTH connect-src
+     (htmx) and form-action (no-JavaScript fallback), and in config.offsite.allowedOrigins
+     (src/js/config.js). Keep the three in sync. Inline style is allowed because GSAP writes
+     styles; eval is allowed because the Alpine standard build needs it (architecture D11). -->
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://formspree.io; base-uri 'self'; form-action 'self' https://formspree.io mailto:; object-src 'none'"
+/>

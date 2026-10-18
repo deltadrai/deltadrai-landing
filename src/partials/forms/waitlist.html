@@ -1,0 +1,66 @@
+<form
+  method="post"
+  action="https://formspree.io/f/mlgqwgzz"
+  hx-post="https://formspree.io/f/mlgqwgzz"
+  hx-ext="offsite-form"
+  hx-target="this"
+  hx-swap="outerHTML"
+  hx-disabled-elt="find button[type='submit']"
+>
+  <!-- Fixed staff-facing lead notice that the visitor never sees or edits. -->
+  <input
+    type="hidden"
+    name="message"
+    value="New lead: a visitor joined the deltadr.ai waitlist from the coming-soon page."
+  />
+  <!-- Spam honeypot (Formspree's _gotcha): real visitors never see or fill it. -->
+  <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+
+  <div class="flex flex-wrap justify-center gap-3">
+    <label class="sr-only" for="waitlist-email">Email address</label>
+    <input
+      id="waitlist-email"
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="you@example.com"
+      class="min-w-0 flex-[1_1_260px] rounded-xl border border-brand-ink/15 bg-white px-[1.1rem] py-[0.85rem] text-base text-brand-ink placeholder:text-brand-ink/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal-700 disabled:opacity-60"
+    />
+    <button
+      type="submit"
+      class="flex-none cursor-pointer rounded-xl bg-brand-teal-700 px-[1.6rem] py-[0.85rem] text-base font-semibold text-white transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal-700 enabled:hover:bg-brand-teal-800 disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      <span class="htmx-request:hidden">Notify me</span>
+      <span class="htmx-indicator hidden htmx-request:inline">Sending…</span>
+    </button>
+  </div>
+
+  <p class="mt-4 text-sm text-brand-ink/75">
+    We only use your email address to tell you when we launch.
+    <a
+      href="/datenschutz/"
+      class="font-semibold text-brand-teal-700 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal-700"
+      >Privacy policy (German)</a
+    >
+  </p>
+
+  <div role="status" data-form-status class="text-left text-sm not-empty:mt-4"></div>
+
+  <template data-offsite="success">
+    <div data-anim="appear" class="mt-4">
+      <p tabindex="-1" autofocus class="font-semibold text-success-700 outline-none">
+        Thanks — you're on the list. We'll be in touch.
+      </p>
+    </div>
+  </template>
+
+  <template data-offsite="error">
+    <div data-anim="appear" class="space-y-2 text-alert-600">
+      <p tabindex="-1" autofocus class="font-semibold outline-none">
+        Something went wrong. Please try again.
+      </p>
+      <ul data-offsite-errors class="list-inside list-disc"></ul>
+    </div>
+  </template>
+</form>
