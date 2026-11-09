@@ -1,2 +1,5 @@
 _site/
 node_modules/
+
+# Pi harness local state, never commit
+.pi/
